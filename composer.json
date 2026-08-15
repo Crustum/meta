@@ -1,0 +1,84 @@
+{
+    "name": "crustum/meta",
+    "description": "Meta plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "license": "MIT",
+    "keywords": [
+        "cakephp",
+        "crustum",
+        "meta"
+    ],
+    "authors": [
+        {
+            "name": "Evgeny Tomenko",
+            "homepage": "https://github.com/skie"
+        }
+    ],
+    "require": {
+        "php": ">=8.4",
+        "cakephp/cakephp": "^5.4",
+        "crustum/plugin-manifest": "^1.0",
+        "symfony/polyfill-php84": "^1.31"
+    },
+    "require-dev": {
+        "cakedc/cakephp-phpstan": "^4.3",
+        "cakephp/cakephp-codesniffer": "^5.0",
+        "crustum/essentia": "^1.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-arch": "^4.0",
+        "phpstan/phpstan": "^2.2.2,<2.2.6",
+        "rector/rector": "^2.5",
+        "boundwize/structarmed": "0.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crustum\\Meta\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crustum\\Meta\\Test\\": "tests/",
+            "TestApp\\": "tests/TestApp/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@rector-check",
+            "@test",
+            "@analyse"
+        ],
+        "fix": [
+            "@cs-fix",
+            "@rector-fix",
+            "@cs-fix",
+            "@analyse"
+        ],
+        "analyse": [
+            "@stan"
+        ],
+        "cs-check": "phpcs -p --standard=phpcs.xml src/ tests/",
+        "cs-fix": "phpcbf --standard=phpcs.xml src/ tests/",
+        "test": "pest",
+        "test:feature": "pest tests/Feature",
+        "test:phpunit": "phpunit",
+        "rector-check": "vendor/bin/rector process --dry-run",
+        "rector-fix": "vendor/bin/rector process",
+        "stan": "phpstan analyse src/",
+        "stan-baseline": "phpstan analyse --generate-baseline",
+        "structarmed": "vendor/bin/structarmed analyze src"
+    },
+    "extra": {
+        "installer-name": "Meta"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cakephp/plugin-installer": true,
+            "php-http/discovery": false,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
