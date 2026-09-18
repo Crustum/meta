@@ -47,5 +47,7 @@ it('sets the container registry from the application container during bootstrap'
 
     $plugin->bootstrap($app);
 
-    expect(ContainerRegistry::getInstance())->toBe($app->getContainer());
+    $container = $app->getContainer();
+
+    expect(ContainerRegistry::getInstance())->toBe($container);
 });

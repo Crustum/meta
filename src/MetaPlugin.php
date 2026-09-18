@@ -34,9 +34,10 @@ class MetaPlugin extends BasePlugin implements ManifestInterface
     {
         parent::bootstrap($app);
 
-        if ($app instanceof ContainerApplicationInterface) {
-            ContainerRegistry::setInstance($app->getContainer());
-        }
+        $app->getEventManager()->on('Application.buildContainer', function ($event): void {
+            $container = $event->getData('container');
+            ContainerRegistry::setInstance($container);
+        });
     }
 
     /**
